@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI GeoGebra Simulation Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>AI GeoGebra Simulation Studio</h1>
+      <p>Interactive math simulation with an offline AI helper (no API key).</p>
+    </header>
+
+    <main>
+      <section class="panel left">
+        <h2>Simulation Controls</h2>
+        <div class="row">
+          <label for="commandInput">GeoGebra Command</label>
+          <input id="commandInput" placeholder="e.g. f(x)=sin(a x), a=2" />
+        </div>
+        <div class="buttons">
+          <button id="runCommand">Run Command</button>
+          <button id="resetBoard">Reset</button>
+          <button id="loadDemo">Load Demo</button>
+        </div>
+
+        <h3>AI Assistant (Local)</h3>
+        <p class="hint">Ask naturally: “draw parabola with slider”, “show derivative”, “random points and fit line”.</p>
+        <textarea id="aiPrompt" rows="5" placeholder="Describe what you want to simulate..."></textarea>
+        <div class="buttons">
+          <button id="askAi">Generate Steps</button>
+          <button id="applyAi">Apply to GeoGebra</button>
+        </div>
+        <pre id="aiResponse"></pre>
+      </section>
+
+      <section class="panel right">
+        <h2>GeoGebra Canvas</h2>
+        <div id="ggb-element"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

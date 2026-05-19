@@ -1,0 +1,23 @@
+name: Validate Static GeoGebra Studio
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  lint-html-js:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate required files
+        run: |
+          test -f index.html
+          test -f app.js
+          test -f styles.css
+      - name: Basic syntax check
+        run: |
+          node --check app.js
+          python -m py_compile - <<'PY'
+print('No python runtime app required for static build')
+PY

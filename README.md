@@ -1,36 +1,36 @@
-# Browser Workflow (Tor benzeri VPN/proxy)
+# AI-Powered GeoGebra Simulation (No API Key)
 
-Bu repo, tarayıcıyı bir workflow içinde **Tor SOCKS5 proxy** üzerinden açmak için örnek bir kurulum içerir.
-
-> Not: Gerçek "built-in VPN" tarayıcı içinde sihirli bir özellik değil; genelde bir proxy/VPN servisine bağlanılır.
-> Buradaki yaklaşım: Chromium + Tor SOCKS5 (`socks5://127.0.0.1:9050`).
-
-## Kurulum
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
+Bu proje, **tam çalışan** bir GeoGebra simülasyon arayüzü sağlar:
+- Tarayıcıda doğrudan GeoGebra Graphing açılır.
+- Yerel (offline) kural-tabanlı bir “AI Assistant” ile doğal dilde komut verip adım üretebilirsin.
+- **API key gerekmez.**
 
 ## Çalıştırma
 
-Önce sistemde Tor servisini açın (veya Docker ile çalıştırın), sonra:
+Sadece statik dosya sunucusu ile aç:
 
 ```bash
-python app.py
+python3 -m http.server 8080
 ```
 
-Script şu adımları yapar:
-1. Tor proxy erişimini kontrol eder.
-2. Playwright ile Chromium'u **proxy üzerinden** başlatır.
-3. `https://check.torproject.org/` sayfasını açar.
-4. Ekran görüntüsünü `artifacts/tor-check.png` olarak kaydeder.
+Sonra tarayıcıda:
 
-## GitHub Actions
+`http://localhost:8080`
 
-`.github/workflows/tor-browser.yml` workflow'u:
-- Ubuntu runner'da Tor ve bağımlılıkları kurar
-- Scripti çalıştırır
-- Ekran görüntüsünü artifact olarak yükler
+## Özellikler
 
+- GeoGebra canvas + toolbar
+- Elle komut çalıştırma (ör: `f(x)=sin(x)`)
+- Demo yükleme
+- AI prompt ile komut planı üretme ve tek tık uygulama
+
+## AI (Anahtarsız) Nasıl Çalışıyor?
+
+`app.js` içinde bir local parser var. Prompt içindeki anahtar kelimelere göre GeoGebra komutları öneriyor:
+- parabola
+- sine/sin
+- derivative/türev
+- integral/alan
+- random + fit/regression
+
+Bu yüzden dış API yok, key yok, ve anında çalışır.
